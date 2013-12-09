@@ -1,7 +1,6 @@
 #!/bin/bash
 
 ########################################################
-#Crappy DU script                                      #
 #Takes a file path as an argument                      #
 #Prints the largest files in the directory (top 10)    #
 #Prints the total size of the directory                #
