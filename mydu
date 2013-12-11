@@ -8,8 +8,8 @@
 
 usage () { echo "mydu <file directory>"; echo;}
 
-if [ `uname -s` == 'Darwin' ]; then
-    echo "Human readable output is not currently supported on Mac"
+if [ `uname -s` == 'Darwin' ] || [ `uname -s` == 'FreeBSD' ]; then
+    echo "Human readable output is not currently supported on your system"
     echo
     DU="du -ac"
     SORT="sort -nr"
