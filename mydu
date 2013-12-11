@@ -8,6 +8,9 @@
 
 usage () { echo "mydu <file directory>"; echo;}
 
+DU="du -ha"
+SORT="sort -r"
+
 if [ ! $# == 1 ]; then  
     usage
     exit
@@ -15,7 +18,7 @@ else
 
 DIRECTORY="$1"
 if [ -d $DIRECTORY ]; then
-    du -h -a $DIRECTORY 2> /dev/null|sort -r|awk '
+    $DU $DIRECTORY 2> /dev/null|$SORT|awk '
     {
         file_count=0
         print "Total Size:" $1
