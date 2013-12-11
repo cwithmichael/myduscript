@@ -15,15 +15,15 @@ else
 
 DIRECTORY="$1"
 if [ -d $DIRECTORY ]; then
-du $DIRECTORY -h -a 2> /dev/null|sort -hr|awk '
-{
-    file_count=0
-    print "Total Size:" $1
-    while(getline == 1){
-        print $1, $2 
-        file_count = file_count + 1
+    du -h -a $DIRECTORY 2> /dev/null|sort -r|awk '
+    {
+        file_count=0
+        print "Total Size:" $1
+        while(getline == 1){
+            print $1, $2 
+            file_count = file_count + 1
+        }
     }
-}
     END{"File Count:" file_count}
 '|head -11
 else
