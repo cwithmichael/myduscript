@@ -8,7 +8,7 @@
 
 usage () { echo "mydu <file directory>"; echo;}
 
-if [ `uname -s` == 'Darwin' ] || [ `uname -s` == 'FreeBSD' ]; then
+if [ `uname -s` = 'Darwin' ] || [ `uname -s` = 'FreeBSD' ]; then
     echo "Human readable output is not currently supported on your system"
     echo
     DU="du -ac"
@@ -18,7 +18,7 @@ else
     SORT="sort -hr"
 fi
 
-if [ ! $# == 1 ]; then  
+if [ ! $# = 1 ]; then  
     usage
     exit
 
