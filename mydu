@@ -13,9 +13,12 @@ if [ `uname -s` = 'Darwin' ] || [ `uname -s` = 'FreeBSD' ]; then
     echo
     DU="du -ac"
     SORT="sort -nr"
+    MB=0.000488281249999999
+    BSD=1
 else
     DU="du -ha"
     SORT="sort -hr"
+    MB=1
 fi
 
 if [ ! $# = 1 ]; then  
@@ -29,8 +32,10 @@ else
         {
             count = 0
             while(getline == 1 && count != 11){
-                if (count == 0)
-                    print "Total Size: " $1
+                if (count == 0 && $BSD == 1)
+                    print "Total Size: " $1*MB "Megabytes" 
+		else if (count == 0)
+		    print "Total Size: " $1
                 else
                     print $1, $2 
                     count = count + 1
