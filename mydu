@@ -9,8 +9,9 @@
 usage () { echo "mydu <file directory>"; echo;}
 
 if [ `uname -s` = 'Darwin' ] || [ `uname -s` = 'FreeBSD' ]; then
-    echo "Human readable output is not currently supported on your system"
-    echo
+    printf "%s" "Correct human readable output is " 
+    printf "%s\n" "not currently supported on your system"
+    printf "%s\n\n" "A rough estimate in megabytes will be shown"
     DU="du -ac"
     SORT="sort -nr"
     MB=0.000488281249999999
@@ -28,12 +29,12 @@ if [ ! $# = 1 ]; then
 else
     DIRECTORY="$1"
     if [ -d $DIRECTORY ]; then
-        $DU $DIRECTORY 2> /dev/null|$SORT|awk '
+        $DU $DIRECTORY 2> /dev/null|$SORT|awk -v BSD="$BSD" -v MB="$MB" '
         {
             count = 0
             while(getline == 1 && count != 11){
-                if (count == 0 && $BSD == 1)
-                    print "Total Size: " $1*MB "Megabytes" 
+                if (count == 0 && BSD == 1)
+                    print "Total Size: " $1*MB " Megabytes" 
 		else if (count == 0)
 		    print "Total Size: " $1
                 else
