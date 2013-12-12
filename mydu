@@ -21,24 +21,25 @@ fi
 if [ ! $# == 1 ]; then  
     usage
     exit
-else
 
-DIRECTORY="$1"
-if [ -d $DIRECTORY ]; then
-    $DU $DIRECTORY 2> /dev/null|$SORT|awk '
-    {
-        count = 0
-        while(getline == 1 && count != 11){
-            if (count == 0)
-                print "Total Size: " $1
-            else
-                print $1, $2 
-                count = count + 1
-        }
-    }
-'| head -11
 else
-   echo "Directory not found"
-   exit
-fi
+    DIRECTORY="$1"
+    if [ -d $DIRECTORY ]; then
+        $DU $DIRECTORY 2> /dev/null|$SORT|awk '
+        {
+            count = 0
+            while(getline == 1 && count != 11){
+                if (count == 0)
+                    print "Total Size: " $1
+                else
+                    print $1, $2 
+                    count = count + 1
+            }
+        }
+    '| head -11
+
+    else
+        echo "Directory not found"
+        exit
+    fi
 fi
